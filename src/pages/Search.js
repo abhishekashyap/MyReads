@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BooksList from "../components/BooksList/BooksList";
 
 // API
-import { getAll } from "../BooksAPI";
+import { getAll, search } from "../BooksAPI";
 
 class Search extends Component {
   state = {
@@ -15,6 +15,23 @@ class Search extends Component {
       this.setState({ books });
       console.log(books);
     });
+  }
+
+  searchBook(e) {
+    search(e.target.value.trim())
+      .then((books) => {
+        if (books.error) {
+          console.log("error", books.error);
+          this.setState({ books: [] });
+        } else {
+          console.log("search result", books);
+          this.setState({ books });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ books: [] });
+      });
   }
 
   render() {
@@ -33,7 +50,11 @@ class Search extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-            <input type="text" placeholder="Search by title or author" />
+            <input
+              type="text"
+              onChange={(e) => this.searchBook(e)}
+              placeholder="Search by title or author"
+            />
           </div>
         </div>
         <div className="search-books-results">
