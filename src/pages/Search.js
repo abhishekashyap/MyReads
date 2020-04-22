@@ -1,7 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import BooksList from "../components/BooksList/BooksList";
 
-export default class Search extends Component {
+// API
+import { getAll } from "../BooksAPI";
+
+class Search extends Component {
+  state = {
+    books: [],
+  };
+
+  componentDidMount() {
+    getAll().then((books) => {
+      this.setState({ books });
+      console.log(books);
+    });
+  }
+
   render() {
     return (
       <div className="search-books">
@@ -22,9 +37,11 @@ export default class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid" />
+          <BooksList books={this.state.books} />
         </div>
       </div>
     );
   }
 }
+
+export default Search;
