@@ -5,7 +5,7 @@ function Book(props) {
     <div>
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={props.style} />
+          <div className="book-cover" style={props.book.style} />
           <div className="book-shelf-changer">
             <select>
               <option value="move" disabled>
@@ -18,8 +18,8 @@ function Book(props) {
             </select>
           </div>
         </div>
-        <div className="book-title">{props.title}</div>
-        <div className="book-authors">{props.authors}</div>
+        <div className="book-title">{props.book.title}</div>
+        <div className="book-authors">{props.book.authors}</div>
       </div>
     </div>
   );
