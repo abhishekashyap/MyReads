@@ -11,10 +11,9 @@ export default class Home extends Component {
         </div>
         <div className="list-books-content">
           <div>
-          {/* bookshelf */}
-          <BookShelf heading="Currently Reading" />
-          <BookShelf heading="Want to Read" />
-          <BookShelf heading="Read" />
+            <BookShelf heading="Currently Reading" />
+            <BookShelf heading="Want to Read" />
+            <BookShelf heading="Read" />
           </div>
         </div>
         <OpenSearch to="/search" />
