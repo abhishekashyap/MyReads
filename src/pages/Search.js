@@ -3,19 +3,12 @@ import { Link } from "react-router-dom";
 import BooksList from "../components/BooksList/BooksList";
 
 // API
-import { getAll, search } from "../BooksAPI";
+import { search } from "../BooksAPI";
 
 class Search extends Component {
   state = {
     books: [],
   };
-
-  componentDidMount() {
-    getAll().then((books) => {
-      this.setState({ books });
-      console.log(books);
-    });
-  }
 
   searchBook(e) {
     search(e.target.value.trim())
