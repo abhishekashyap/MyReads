@@ -11,9 +11,21 @@ export default class Home extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf heading="Currently Reading" />
-            <BookShelf heading="Want to Read" />
-            <BookShelf heading="Read" />
+            <BookShelf
+              myBooks={this.props.myBooks}
+              addToBookshelf={this.props.addToBookshelf}
+              heading="Currently Reading"
+            />
+            <BookShelf
+              myBooks={this.props.myBooks}
+              addToBookshelf={this.props.addToBookshelf}
+              heading="Want to Read"
+            />
+            <BookShelf
+              myBooks={this.props.myBooks}
+              addToBookshelf={this.props.addToBookshelf}
+              heading="Read"
+            />
           </div>
         </div>
         <OpenSearch to="/search" />

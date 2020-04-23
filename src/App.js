@@ -11,7 +11,15 @@ import "./App.css";
 
 class BooksApp extends React.Component {
   state = {
-    showSearchPage: false,
+    myBooks: [],
+  };
+
+  addToBookshelf = (book) => {
+    if (book.shelf !== "none") {
+      this.setState((books) => {
+        books.push(book);
+      });
+    }
   };
 
   render() {
@@ -19,10 +27,16 @@ class BooksApp extends React.Component {
       <Router>
         <div className="app">
           <Route path="/" exact>
-            <Home />
+            <Home
+              myBooks={this.state.myBooks}
+              addToBookshelf={this.addToBookshelf}
+            />
           </Route>
           <Route path="/search">
-            <Search />
+            <Search
+              myBooks={this.state.myBooks}
+              addToBookshelf={this.addToBookshelf}
+            />
           </Route>
         </div>
       </Router>

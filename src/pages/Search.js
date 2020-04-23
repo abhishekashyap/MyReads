@@ -7,23 +7,23 @@ import { search } from "../BooksAPI";
 
 class Search extends Component {
   state = {
-    books: [],
+    searchedBooks: [],
   };
 
   searchBook(e) {
     search(e.target.value.trim())
-      .then((books) => {
-        if (books.error) {
-          console.log("error", books.error);
-          this.setState({ books: [] });
+      .then((searchedBooks) => {
+        if (searchedBooks.error) {
+          console.log("error", searchedBooks.error);
+          this.setState({ searchedBooks: [] });
         } else {
-          console.log("search result", books);
-          this.setState({ books });
+          console.log("search result", searchedBooks);
+          this.setState({ searchedBooks });
         }
       })
       .catch((err) => {
         console.log(err);
-        this.setState({ books: [] });
+        this.setState({ searchedBooks: [] });
       });
   }
 
@@ -35,14 +35,6 @@ class Search extends Component {
             Close
           </Link>
           <div className="search-books-input-wrapper">
-            {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
             <input
               type="text"
               onChange={(e) => this.searchBook(e)}
@@ -51,7 +43,11 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BooksList books={this.state.books} />
+          <BooksList
+            searchedBooks={this.state.searchedBooks}
+            myBooks={this.props.myBooks}
+            addToBookshelf={this.props.addToBookshelf}
+          />
         </div>
       </div>
     );
