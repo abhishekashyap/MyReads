@@ -16,9 +16,7 @@ class BooksApp extends React.Component {
 
   addToBookshelf = (book) => {
     if (book.shelf !== "none") {
-      this.setState((state) => {
-        state.myBooks.push(book);
-      });
+      this.setState({ myBooks: [...this.state.myBooks, book] });
     }
   };
 

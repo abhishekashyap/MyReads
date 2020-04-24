@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import OpenSearch from "../components/OpenSearch/OpenSearch";
 import BookShelf from "../components/BookShelf/BookShelf";
+import { getAll } from "../BooksAPI";
 
 export default class Home extends Component {
+  componentDidMount() {
+    getAll().then((books) => {
+      books.map((book) => this.props.addToBookshelf(book));
+      console.log(books);
+    });
+  }
+
   render() {
     return (
       <div className="list-books">
