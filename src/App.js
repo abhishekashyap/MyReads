@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// import * as BooksAPI from './BooksAPI'
+import { getAll } from "./BooksAPI";
 
 // Pages
 import Home from "./pages/Home";
@@ -14,23 +14,32 @@ class BooksApp extends React.Component {
     myBooks: [],
   };
 
+  componentDidMount() {
+    getAll().then((books) => {
+      this.setState({ myBooks: books });
+    });
+  }
+
   addToBookshelf = (book) => {
     if (book.shelf !== "none") {
       // if user switches from none to another shelf, append to array
       // else just change the shelf
-      this.setState({ myBooks: [...this.state.myBooks, book] });
+      this.setState((state) => {
+        if (state.myBooks.includes(book)) {
+          return { myBooks: [...this.state.myBooks] };
+        } else {
+          return { myBooks: [...this.state.myBooks, book] };
+        }
+      });
+    } else {
+      this.setState({
+        // remove from bookshelf
+        myBooks: this.state.myBooks.filter((myBook) => myBook !== book),
+      });
     }
   };
 
-  removeFromBookshelf = (book) => {
-    this.setState({
-      myBooks: this.state.myBooks.filter((myBook) => myBook !== book),
-    });
-  };
-
-  changeBookshelf = () => {
-    return null;
-  };
+  changeBookshelf = (book) => {};
 
   render() {
     return (
