@@ -10,6 +10,7 @@ class BookShelfChanger extends Component {
     await this.setState({ value: event.target.value });
     console.log(this.state.value);
 
+    
     this.props.book["shelf"] = this.state.value;
     await update(this.props.book, this.props.book.shelf);
     this.props.addToBookshelf(this.props.book);

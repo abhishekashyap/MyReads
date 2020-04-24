@@ -11,20 +11,23 @@ class Search extends Component {
   };
 
   searchBook(e) {
-    search(e.target.value.trim())
-      .then((searchedBooks) => {
-        if (searchedBooks.error) {
-          console.log("error", searchedBooks.error);
+    if (e.target.value && e.target.value !== "") {
+      search(e.target.value.trim())
+        .then((searchedBooks) => {
+          if (searchedBooks.error) {
+            this.setState({ searchedBooks: [] });
+          } else {
+            console.log("search result", searchedBooks);
+            this.setState({ searchedBooks });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
           this.setState({ searchedBooks: [] });
-        } else {
-          console.log("search result", searchedBooks);
-          this.setState({ searchedBooks });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ searchedBooks: [] });
-      });
+        });
+    } else {
+      this.setState({ searchedBooks: [] });
+    }
   }
 
   render() {

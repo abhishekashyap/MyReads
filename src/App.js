@@ -16,8 +16,20 @@ class BooksApp extends React.Component {
 
   addToBookshelf = (book) => {
     if (book.shelf !== "none") {
+      // if user switches from none to another shelf, append to array
+      // else just change the shelf
       this.setState({ myBooks: [...this.state.myBooks, book] });
     }
+  };
+
+  removeFromBookshelf = (book) => {
+    this.setState({
+      myBooks: this.state.myBooks.filter((myBook) => myBook !== book),
+    });
+  };
+
+  changeBookshelf = () => {
+    return null;
   };
 
   render() {
