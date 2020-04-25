@@ -18,6 +18,7 @@ class Search extends Component {
             this.setState({ searchedBooks: [] });
           } else {
             console.log("search result", searchedBooks);
+            
             this.setState({ searchedBooks });
           }
         })
