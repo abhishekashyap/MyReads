@@ -17,9 +17,13 @@ class Search extends Component {
           if (searchedBooks.error) {
             this.setState({ searchedBooks: [] });
           } else {
-            console.log("search result", searchedBooks);
-            
-            this.setState({ searchedBooks });
+            this.setState({
+              searchedBooks: searchedBooks.map(
+                (book) =>
+                  this.props.myBooks.find((myBook) => myBook.id === book.id) ||
+                  book
+              ),
+            });
           }
         })
         .catch((err) => {
