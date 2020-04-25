@@ -1,6 +1,6 @@
 # MyReads
 
-An online library based on React
+An online eBook library based on React
 
 ## Getting Started
 
